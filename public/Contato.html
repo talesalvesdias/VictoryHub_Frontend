@@ -204,6 +204,34 @@
     <script>
         const form = document.getElementById('contact-form');
 
+        // Helper function to validate email format
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Helper function to show error
+        function showError(inputId, errorId) {
+            const input = document.getElementById(inputId);
+            const error = document.getElementById(errorId);
+            input.classList.add('error');
+            error.classList.add('visible');
+        }
+
+        // Helper function to clear error
+        function clearError(inputId, errorId) {
+            const input = document.getElementById(inputId);
+            const error = document.getElementById(errorId);
+            input.classList.remove('error');
+            error.classList.remove('visible');
+        }
+
+        // Clear errors on input
+        document.getElementById('nome').addEventListener('input', () => clearError('nome', 'nome-error'));
+        document.getElementById('email').addEventListener('input', () => clearError('email', 'email-error'));
+        document.getElementById('assunto').addEventListener('change', () => clearError('assunto', 'assunto-error'));
+        document.getElementById('mensagem').addEventListener('input', () => clearError('mensagem', 'mensagem-error'));
+
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -212,9 +240,44 @@
             const assunto  = document.getElementById('assunto').value;
             const mensagem = document.getElementById('mensagem').value.trim();
 
-            // if (v1 && v2 && v3 && v4) {
+            let isValid = true;
+
+            // Validate nome
+            if (!nome) {
+                showError('nome', 'nome-error');
+                isValid = false;
+            } else {
+                clearError('nome', 'nome-error');
+            }
+
+            // Validate email
+            if (!email || !isValidEmail(email)) {
+                showError('email', 'email-error');
+                isValid = false;
+            } else {
+                clearError('email', 'email-error');
+            }
+
+            // Validate assunto
+            if (!assunto) {
+                showError('assunto', 'assunto-error');
+                isValid = false;
+            } else {
+                clearError('assunto', 'assunto-error');
+            }
+
+            // Validate mensagem
+            if (!mensagem) {
+                showError('mensagem', 'mensagem-error');
+                isValid = false;
+            } else {
+                clearError('mensagem', 'mensagem-error');
+            }
+
+            // Only redirect if all fields are valid
+            if (isValid) {
                 window.location.href = 'feedback.html';
-            // }
+            }
         });
     </script>
 </body>
