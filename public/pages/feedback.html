@@ -6,22 +6,23 @@
     <title>VictoryHub | Mensagem Enviada</title>
     <!-- Importando as fontes para ficar igual à imagem -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="Feedback.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/feedback.css">
 </head>
 <body>
-
     <!-- NAVBAR -->
+    <header>
     <nav class="navbar">
         <div class="logo">
-            <span class="icon"><img src="./Imagens/VictoryHUB_logo_1.png" width="25"></span>
+            <span class="icon"><img src="../images/logo.png" width="25" alt="VictoryHub Logo"></span>
             <span class="brand-name">VictoryHUB</span>
         </div>
 
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="Torneio.html">Torneios</a></li>
-            <li><a href="Sobre.html">Sobre Nós</a></li>
-            <li><a href="Contato.html">Contato</a></li>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="torneio.html">Torneios</a></li>
+            <li><a href="sobre.html">Sobre Nós</a></li>
+            <li><a href="contato.html">Contato</a></li>
         </ul>
 
         <div class="auth-buttons">
@@ -29,7 +30,9 @@
             <a href="#" class="btn-signup">Cadastrar</a>
         </div>
     </nav>
+    </header>
 
+    <main>
     <!-- FEEDBACK SECTION -->
     <div class="feedback-wrapper" id="feedback-wrapper">
 
@@ -54,8 +57,8 @@
             </p>
 
             <div class="feedback-actions">
-                <a href="index.html" class="btn btn-accent btn-lg">Voltar para Home</a>
-                <a href="Torneio.html" class="btn btn-ghost btn-lg">Ver Torneios</a>
+                <a href="../index.html" class="btn btn-accent btn-lg">Voltar para Home</a>
+                <a href="torneio.html" class="btn btn-ghost btn-lg">Ver Torneios</a>
             </div>
 
             <div class="countdown-bar-wrap">
@@ -67,14 +70,14 @@
 
         </div>
     </div>
+    </main>
 
-    <!-- FOOTER (ATUALIZADO) -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-container">
-            <!-- Coluna Brand -->
             <div class="footer-brand">
                 <div class="logo-footer">
-                    <span class="icon-small"><img src="./Imagens/VictoryHUB_logo_1.png" width="25" alt=""></span>
+                    <span class="icon-small"><img src="../images/logo.png" width="25" alt="VictoryHub Logo"></span>
                     <span class="brand-name">VICTORYHUB</span>
                 </div>
                 <p class="copyright">© 2025 VictoryHub. Todos os direitos reservados.</p>
@@ -113,55 +116,7 @@
         </div>
     </footer>
 
-    <script>
-        // Trigger card entrance animation
-        window.addEventListener('load', () => {
-            requestAnimationFrame(() => {
-                document.getElementById('feedback-card').classList.add('visible');
-            });
-
-            // Burst particles
-            const wrapper = document.getElementById('feedback-wrapper');
-            const colors  = ['#fc5757', '#34d399', '#f5f5f5', '#ff7d7d'];
-
-            for (let i = 0; i < 18; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                p.style.background = colors[i % colors.length];
-
-                const angle    = (i / 18) * 360;
-                const distance = 120 + Math.random() * 80;
-                const tx       = Math.cos((angle * Math.PI) / 180) * distance;
-                const ty       = Math.sin((angle * Math.PI) / 180) * distance;
-                const delay    = 0.6 + Math.random() * 0.3;
-                const size     = 4 + Math.random() * 6;
-
-                p.style.cssText += `
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: 50%;
-                    top: 40%;
-                    animation: particle-burst-${i} 0.8s ease ${delay}s forwards;
-                `;
-
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes particle-burst-${i} {
-                        0%   { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-                        100% { transform: translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0);
-                               opacity: 0; }
-                    }
-                `;
-                document.head.appendChild(style);
-                wrapper.appendChild(p);
-            }
-
-            // Auto-redirect after 5 seconds + 1.5s animation delay = 6.5s total
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 6500);
-        });
-    </script>
+    <script src="../js/feedback-animations.js"></script>
 
 </body>
 </html>

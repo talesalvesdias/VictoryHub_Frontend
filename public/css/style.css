@@ -1,0 +1,396 @@
+/* ========================================
+   VictoryHub - Estilos da Página Inicial
+   Estilos específicos para index.html
+   ======================================== */
+
+/* ========================================
+   Seção Hero (Banner Principal)
+   ======================================== */
+.hero {
+  background: radial-gradient(circle at 70% 50%, rgba(212, 163, 115, 0.15), transparent 40%),
+              linear-gradient(90deg, #0a0a0a 40%, #1a0f0a 100%);
+  color: var(--color-text);
+  padding: 100px 50px;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 50px;
+  align-items: center;
+}
+
+/* Tipografia do Hero */
+.subtitle {
+  color: var(--color-text);
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.hero-content h1 {
+  font-family: var(--font-headings);
+  font-size: 80px;
+  line-height: 1.0;
+  margin: 0 0 20px 0;
+  letter-spacing: 1px;
+}
+
+.description {
+  color: #a0a0a0;
+  max-width: 500px;
+  line-height: 1.6;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+/* Botões do Hero */
+.hero-btns {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+/* Divisor e Estatísticas */
+.divider {
+  border: 0;
+  border-top: 1px solid #222;
+  margin-bottom: 30px;
+}
+
+.stats {
+  display: flex;
+  gap: var(--spacing-xl);
+}
+
+.stat-item h2 {
+  font-family: var(--font-headings);
+  font-size: 32px;
+  margin: 0;
+}
+
+.stat-item p {
+  color: #666;
+  font-size: 11px;
+  letter-spacing: 1px;
+  margin-top: 5px;
+}
+
+/* Visual do Hero (Lado Direito) */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.circle-animation {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle-animation::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(206, 45, 45, 0.2), transparent 70%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.circle {
+  position: absolute;
+  border: 1px solid rgba(255, 66, 66, 0.158);
+  border-radius: 50%;
+}
+
+.c1 { width: 400px; height: 400px; }
+.c2 { width: 280px; height: 280px; }
+.c3 { width: 180px; height: 180px; }
+
+/* ========================================
+   Seção de Funcionalidades
+   ======================================== */
+section {
+  background-color: var(--color-section-bg);
+  padding: 40px 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.features-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: var(--max-width);
+  width: 100%;
+}
+
+.feature-card {
+  background-color: var(--color-dark-card);
+  padding: 30px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-dark-card);
+  transition: var(--transition-normal);
+}
+
+.feature-icon {
+  background-color: var(--color-dark-card);
+  color: var(--color-dark);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  margin-bottom: 20px;
+  border: 1px solid #3d2e20;
+}
+
+.feature-card h3 {
+  color: var(--color-text);
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ========================================
+   Seção de Torneios
+   ======================================== */
+.tournaments {
+  padding-top: var(--spacing-2xl);
+}
+
+.tournaments-header {
+  max-width: var(--max-width);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 30px;
+}
+
+.btn-view-all {
+  text-decoration: none;
+  color: var(--color-text);
+  border: 1px solid #110f0f;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+}
+
+/* Grid de Torneios */
+.tournaments-grid {
+  color: var(--color-text);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: var(--max-width);
+  width: 100%;
+}
+
+.tournament-card {
+  background-color: var(--color-dark-card);
+  padding: 25px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.game-tag {
+  color: var(--color-text);
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.live-tag {
+  background-color: rgba(30, 60, 40, 0.4);
+  color: var(--color-success);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  border: 1px solid #1e3c28;
+}
+
+.tournament-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.players-count {
+  color: #fffafa;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+/* Barra de Progresso */
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background-color: #414040;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+}
+
+/* ========================================
+   Seção CTA (Chamada para Ação)
+   ======================================== */
+.cta {
+  background-color: var(--color-dark);
+  padding: 120px 20px;
+  text-align: center;
+}
+
+.subtitle-yellow {
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.cta-title {
+  font-family: var(--font-headings);
+  font-size: 72px;
+  color: var(--color-text);
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.cta-text {
+  color: var(--color-text-muted);
+  font-size: 18px;
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+.btn-primary-large {
+  background-color: var(--color-primary);
+  color: var(--color-dark);
+  padding: 18px 45px;
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: var(--transition-normal);
+  display: inline-block;
+}
+
+.btn-primary-large:hover {
+  background-color: #d4a373;
+  transform: translateY(-3px);
+}
+
+/* ========================================
+   Design Responsivo - Página Inicial
+   ======================================== */
+@media (max-width: 1200px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hero-visual {
+    order: -1;
+  }
+
+  .circle-animation {
+    width: 300px;
+    height: 300px;
+  }
+
+  .c1 { width: 300px; height: 300px; }
+  .c2 { width: 220px; height: 220px; }
+  .c3 { width: 140px; height: 140px; }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    padding: 60px 30px;
+    min-height: auto;
+  }
+
+  .hero-content h1 {
+    font-size: 56px;
+  }
+
+  .features-container,
+  .tournaments-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cta-title {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 40px 20px;
+  }
+
+  .hero-content h1 {
+    font-size: 40px;
+  }
+
+  .hero-btns {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .features-container,
+  .tournaments-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tournaments-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  section {
+    padding: 30px 20px;
+  }
+
+  .cta {
+    padding: 60px 20px;
+  }
+
+  .cta-title {
+    font-size: 36px;
+  }
+}

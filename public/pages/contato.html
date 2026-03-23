@@ -6,22 +6,23 @@
     <title>VictoryHub | Contato</title>
     <!-- Importando as fontes para ficar igual à imagem -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="Contato.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/contato.css">
 </head>
 <body>
-
     <!-- NAVBAR -->
+    <header>
     <nav class="navbar">
         <div class="logo">
-            <span class="icon"><img src="./Imagens/VictoryHUB_logo_1.png" width="25"></span>
+            <span class="icon"><img src="../images/logo.png" width="25" alt="VictoryHub Logo"></span>
             <span class="brand-name">VictoryHUB</span>
         </div>
 
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="Torneio.html">Torneios</a></li>
-            <li><a href="Sobre.html">Sobre Nós</a></li>
-            <li><a href="Contato.html" class="active">Contato</a></li>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="torneio.html">Torneios</a></li>
+            <li><a href="sobre.html">Sobre Nós</a></li>
+            <li><a href="contato.html" class="active">Contato</a></li>
         </ul>
 
         <div class="auth-buttons">
@@ -29,7 +30,9 @@
             <a href="#" class="btn-signup">Cadastrar</a>
         </div>
     </nav>
+    </header>
 
+    <main>
     <!-- CONTACT SECTION -->
     <section class="contact">
         <div class="contact-header">
@@ -155,14 +158,14 @@
 
         </div>
     </section>
+    </main>
 
-    <!-- FOOTER (ATUALIZADO) -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-container">
-            <!-- Coluna Brand -->
             <div class="footer-brand">
                 <div class="logo-footer">
-                    <span class="icon-small"><img src="./Imagens/VictoryHUB_logo_1.png" width="25" alt=""></span>
+                    <span class="icon-small"><img src="../images/logo.png" width="25" alt="VictoryHub Logo"></span>
                     <span class="brand-name">VICTORYHUB</span>
                 </div>
                 <p class="copyright">© 2025 VictoryHub. Todos os direitos reservados.</p>
@@ -201,84 +204,6 @@
         </div>
     </footer>
 
-    <script>
-        const form = document.getElementById('contact-form');
-
-        // Helper function to validate email format
-        function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-
-        // Helper function to show error
-        function showError(inputId, errorId) {
-            const input = document.getElementById(inputId);
-            const error = document.getElementById(errorId);
-            input.classList.add('error');
-            error.classList.add('visible');
-        }
-
-        // Helper function to clear error
-        function clearError(inputId, errorId) {
-            const input = document.getElementById(inputId);
-            const error = document.getElementById(errorId);
-            input.classList.remove('error');
-            error.classList.remove('visible');
-        }
-
-        // Clear errors on input
-        document.getElementById('nome').addEventListener('input', () => clearError('nome', 'nome-error'));
-        document.getElementById('email').addEventListener('input', () => clearError('email', 'email-error'));
-        document.getElementById('assunto').addEventListener('change', () => clearError('assunto', 'assunto-error'));
-        document.getElementById('mensagem').addEventListener('input', () => clearError('mensagem', 'mensagem-error'));
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const nome     = document.getElementById('nome').value.trim();
-            const email    = document.getElementById('email').value.trim();
-            const assunto  = document.getElementById('assunto').value;
-            const mensagem = document.getElementById('mensagem').value.trim();
-
-            let isValid = true;
-
-            // Validate nome
-            if (!nome) {
-                showError('nome', 'nome-error');
-                isValid = false;
-            } else {
-                clearError('nome', 'nome-error');
-            }
-
-            // Validate email
-            if (!email || !isValidEmail(email)) {
-                showError('email', 'email-error');
-                isValid = false;
-            } else {
-                clearError('email', 'email-error');
-            }
-
-            // Validate assunto
-            if (!assunto) {
-                showError('assunto', 'assunto-error');
-                isValid = false;
-            } else {
-                clearError('assunto', 'assunto-error');
-            }
-
-            // Validate mensagem
-            if (!mensagem) {
-                showError('mensagem', 'mensagem-error');
-                isValid = false;
-            } else {
-                clearError('mensagem', 'mensagem-error');
-            }
-
-            // Only redirect if all fields are valid
-            if (isValid) {
-                window.location.href = 'feedback.html';
-            }
-        });
-    </script>
+    <script src="../js/form-validation.js"></script>
 </body>
 </html>
