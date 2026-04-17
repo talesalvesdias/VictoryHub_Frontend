@@ -15,8 +15,6 @@ body {
 
 .navbar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 15px 60px;
   background: linear-gradient(to right, #1f1919, #802a2a);
   color: #fff;
@@ -40,10 +38,11 @@ body {
 /* Links de Navegação */
 .nav-links {
   display: flex;
+  flex-wrap: wrap;
   list-style: none;
   gap: 30px;
-  margin: 0;
-  padding: 0;
+  margin-left: 10%;
+  margin-top: 15px;
 }
 
 .nav-links a {
@@ -54,7 +53,7 @@ body {
 }
 
 .nav-links a:hover {
-  color: #fff;
+  color: #000000;
 }
 
 /* Estilo do item 'Home' com fundo destacado */
@@ -68,37 +67,8 @@ body {
 /* Botões da Direita */
 .auth-buttons {
   display: flex;
-  gap: 15px;
+margin-left: auto;
 }
-
-.btn-login {
-  text-decoration: none;
-  color: #fff;
-  border: 1px solid #2a2a2a;
-  padding: 8px 22px;
-  border-radius: 10px;
-  font-size: 14px;
-  background: transparent;
-}
-
-.btn-login:hover {
-  background: #141414;
-}
-
-.btn-signup {
-  text-decoration: none;
-  color: #fff;
-  border: 1px solid #2a2a2a;
-  padding: 8px 22px;
-  border-radius: 10px;
-  font-size: 14px;
-  background: transparent;
-}
-
-.btn-signup:hover {
-  background-color: #141414;
-}
-
 .nav-links {
   gap: 40px;
 }
@@ -110,19 +80,19 @@ body {
   background: radial-gradient(circle at 70% 50%, rgba(212, 163, 115, 0.15), transparent 40%),
               linear-gradient(90deg, #0a0a0a 40%, #1a0f0a 100%);
   color: #fff;
-  padding: 100px 50px;
+  padding: 70px 20px;
   min-height: 80vh;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 }
 
 .hero-container {
-  max-width: 1200px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 50px;
-  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items:center;
 }
 
 /* Tipografia */
@@ -180,6 +150,16 @@ body {
   font-size: 14px;
 }
 
+.btn-primary:hover {
+    background-color: #fa6161;
+    transform: translateY(-3px);
+}
+
+.btn-secondary:hover {
+    background-color: #1a1a1a;
+    transform: translateY(-3px);
+}
+
 /* Divisor e Stats */
 .divider {
   border: 0;
@@ -209,7 +189,6 @@ body {
 .hero-visual {
   display: flex;
   justify-content: center;
-  position: relative;
 }
 
 .circle-animation {
@@ -252,23 +231,21 @@ section {
 
 /* --- SEÇÃO FEATURES --- */
 .features-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: 1200px;
-  width: 100%;
+  display:flex;
+  gap: 5px;
+
 }
 
 .feature-card {
   background-color: #0e0c0c; /* Fundo levemente mais claro */
-  padding: 30px;
+  padding: 20px;
   border-radius: 15px;
   border: 1px solid #0e0c0c;
   transition: 0.3s;
 }
 
 .feature-icon {
-  background-color: #0e0c0c;
+  background-color: #fc5757;
   color: #000000;
   width: 40px;
   height: 40px;
@@ -294,11 +271,11 @@ section {
 
 /* --- SEÇÃO TORNEIOS --- */
 .tournaments {
-  padding-top: 80px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .tournaments-header {
-  max-width: 1200px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -311,36 +288,44 @@ section {
   font-size: 48px;
   margin: 0;
   letter-spacing: 2px;
+  color: #ffffff;
 }
 
 .btn-view-all {
   text-decoration: none;
+  background-color: #000000;
   color: #fff;
-  border: 1px solid #110f0f;
-  padding: 10px 20px;
+  border: 1px solid #fc5757;
+  padding: 15px;
   border-radius: 8px;
   font-size: 14px;
 }
 
+.btn-view-all:hover {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
 /* Grid de Torneios */
 .tournaments-grid {
-  color: #ffffff;
-    display: grid;
+  display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: 1200px;
-  width: 100%;
+  color: #ffffff;
+  gap: 10px;
+  width: 80%;
 }
 
 .tournament-card {
+  display: grid;
+  grid-template-columns: auto;
   background-color: #0e0c0c;
-  padding: 25px;
+  padding: 15px;
   border-radius: 15px;
   border: 1px solid #111111;
 }
 
 .card-top {
-  display: flex;
+  display: auto;
   justify-content: space-between;
   margin-bottom: 20px;
 }
@@ -352,6 +337,8 @@ section {
 }
 
 .live-tag {
+  display:inline-flex;
+  align-items: end;
   background-color: rgba(30, 60, 40, 0.4);
   color: #4ade80;
   padding: 4px 10px;
@@ -399,6 +386,7 @@ section {
     letter-spacing: 2px;
     margin-bottom: 20px;
 }
+
 
 .cta-title {
     font-family: 'Bebas Neue', sans-serif;
@@ -523,12 +511,18 @@ section {
 }
 
 /* Responsividade  */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
     .footer-container, .footer-columns {
         flex-direction: column;
         gap: 40px;
     }
     .cta-title { font-size: 48px; }
+}
+
+@media (max-width: 860px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-info-card { position: static; }
+    .form-row { grid-template-columns: 1fr; }
 }
 
 .reveal {

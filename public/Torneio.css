@@ -15,7 +15,6 @@ body {
 
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 15px 60px;
   background: linear-gradient(to right, #1f1919, #802a2a);
@@ -40,10 +39,11 @@ body {
 /* Links de Navegação */
 .nav-links {
   display: flex;
+  flex-wrap: wrap;
   list-style: none;
   gap: 30px;
-  margin: 0;
-  padding: 0;
+  margin-left: 10%;
+  margin-top: 15px;
 }
 
 .nav-links a {
@@ -54,7 +54,7 @@ body {
 }
 
 .nav-links a:hover {
-  color: #fff;
+  color: #000000;
 }
 
 /* Estilo do item 'Torneios' com fundo destacado */
@@ -68,10 +68,12 @@ body {
 /* Botões da Direita */
 .auth-buttons {
   display: flex;
+ margin-left: auto;
   gap: 15px;
 }
 
 .btn-login {
+
   text-decoration: none;
   color: #fff;
   border: 1px solid #2a2a2a;
@@ -500,6 +502,7 @@ line-height: 1,2;
     }
     .cta-title { font-size: 48px; }
 }
+
 
 .reveal {
   opacity: 0;
