@@ -7,23 +7,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <!-- Importando as fontes para ficar igual à imagem -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="Contato.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/contato.css">
 </head>
 <body>
-
     <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container ">
-    <a class="icon" href="index.html"><img src="./Imagens/VictoryHUB_logo_1.png" width="25"></a>
-    <a class="navbar-brand m-1 text-light" href="index.html">VictoryHUB</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-    
+    <nav class="navbar">
+        <div class="logo">
+            <span class="icon"><img src="./Imagens/VictoryHUB_logo_1.png" width="25"></span>
+            <span class="brand-name">VictoryHUB</span>
+        </div>
+
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="Torneio.html" >Torneios</a></li>
+            <li><a href="Torneio.html">Torneios</a></li>
             <li><a href="Sobre.html">Sobre Nós</a></li>
             <li><a href="Contato.html" class="active">Contato</a></li>
         </ul>
@@ -115,7 +112,9 @@
     </div>
         </div>
     </nav>
+    </header>
 
+    <main>
     <!-- CONTACT SECTION -->
     <section class="contact">
         <div class="contact-header">
@@ -241,14 +240,14 @@
 
         </div>
     </section>
+    </main>
 
-    <!-- FOOTER (ATUALIZADO) -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-container">
-            <!-- Coluna Brand -->
             <div class="footer-brand">
                 <div class="logo-footer">
-                    <span class="icon-small"><img src="./Imagens/VictoryHUB_logo_1.png" width="25" alt=""></span>
+                    <span class="icon-small"><img src="../images/logo.png" width="25" alt="VictoryHub Logo"></span>
                     <span class="brand-name">VICTORYHUB</span>
                 </div>
                 <p class="copyright">© 2025 VictoryHub. Todos os direitos reservados.</p>
@@ -288,7 +287,6 @@
     </footer>
 
     <script>
-
         const form = document.getElementById('contact-form');
 
         // Helper function to validate email format
@@ -366,10 +364,6 @@
                 window.location.href = 'feedback.html';
             }
         });
-    
-        </script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-
+    </script>
 </body>
 </html>

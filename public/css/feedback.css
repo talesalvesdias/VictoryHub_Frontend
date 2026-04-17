@@ -1,0 +1,35 @@
+/* VictoryHub - Estilos da Página de Feedback */
+
+body { display: flex; flex-direction: column; min-height: 100vh; }
+
+.feedback-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; padding: 80px 20px; position: relative; overflow: hidden; background-color: var(--color-dark); }
+.feedback-wrapper::before { content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(252,87,87,0.07) 0%, transparent 70%); pointer-events: none; }
+
+.feedback-card { background: var(--color-dark-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: 64px 56px; text-align: center; max-width: 520px; width: 100%; position: relative; z-index: 1; opacity: 0; transform: translateY(32px) scale(0.97); transition: opacity 0.6s ease, transform 0.6s ease; }
+.feedback-card.visible { opacity: 1; transform: translateY(0) scale(1); }
+
+.check-container { width: 88px; height: 88px; border-radius: 50%; background: rgba(52,211,153,0.08); border: 2px solid rgba(52,211,153,0.2); margin: 0 auto 28px; display: flex; align-items: center; justify-content: center; position: relative; }
+.check-ring { position: absolute; inset: -8px; border-radius: 50%; border: 2px solid transparent; border-top-color: #34d399; animation: ring-spin 0.8s ease forwards; opacity: 0; }
+@keyframes ring-spin { 0% { transform: rotate(0deg); opacity: 1; } 80% { transform: rotate(360deg); opacity: 1; } 100% { transform: rotate(360deg); opacity: 0; } }
+.check-svg { width: 40px; height: 40px; color: #34d399; }
+.check-path { stroke-dasharray: 52; stroke-dashoffset: 52; animation: draw-check 0.5s ease 0.7s forwards; }
+@keyframes draw-check { to { stroke-dashoffset: 0; } }
+
+.feedback-title { font-family: var(--font-headings); font-size: 40px; letter-spacing: 0.02em; color: var(--color-text); margin-bottom: 12px; opacity: 0; animation: fadeUp 0.5s ease 0.9s forwards; }
+.feedback-sub { font-size: 15px; color: var(--color-text-muted); line-height: 1.75; margin-bottom: 36px; opacity: 0; animation: fadeUp 0.5s ease 1.05s forwards; }
+.feedback-sub strong { color: var(--color-text); }
+.feedback-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.5s ease 1.2s forwards; }
+
+.btn-ghost { background: transparent; border: 1px solid #333; color: var(--color-text); }
+.btn-ghost:hover { background: var(--color-dark-lighter); }
+
+.countdown-bar-wrap { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--color-border); opacity: 0; animation: fadeUp 0.5s ease 1.35s forwards; }
+.countdown-text { font-size: 12px; color: var(--color-text-muted); margin-bottom: 10px; }
+.countdown-bar { height: 3px; background: var(--color-dark-lighter); border-radius: 100px; overflow: hidden; }
+.countdown-fill { height: 100%; width: 100%; background: linear-gradient(90deg, #c44545, var(--color-primary)); border-radius: 100px; transform-origin: left; animation: shrink-bar 5s linear 1.5s forwards; }
+@keyframes shrink-bar { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+.particle { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--color-primary); opacity: 0; pointer-events: none; }
+
+@media (max-width: 600px) { .feedback-card { padding: 40px 24px; } .feedback-title { font-size: 32px; } .feedback-actions { flex-direction: column; } }

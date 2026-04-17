@@ -1,0 +1,48 @@
+/* VictoryHub - Estilos da Página de Torneios */
+
+.tournament { padding-top: 80px; padding-bottom: 40px; background-color: var(--color-dark); }
+.tournament-header { max-width: var(--max-width); width: 100%; display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; }
+.subtitle { color: var(--color-primary); margin-left: 75px; }
+.title { color: var(--color-text); font-size: 55px; padding: 10px; margin-left: 65px; }
+.divider { border: 1px solid var(--color-primary); margin-left: 75px; margin-right: 85%; min-width: 85px; max-width: 85px; }
+.content { color: var(--color-text); max-width: 650px; margin-left: 77px; margin-top: 35px; line-height: 1.2; }
+
+.buttons { gap: 15px; margin-bottom: 40px; }
+.btn-all, .btn-valorant, .btn-marvel, .btn-cod, .btn-cs, .btn-live { text-decoration: none; color: var(--color-text); border: 1px solid #ff7c7c; padding: 8px 22px; border-radius: var(--radius-lg); font-size: 14px; background: transparent; }
+.btn-all:hover, .btn-valorant:hover, .btn-marvel:hover, .btn-cod:hover, .btn-cs:hover, .btn-live:hover { background: #141414; }
+
+.description { line-height: 25px; color: #888282; }
+.divider1 { border: 1px solid var(--color-primary); min-width: 600px; max-width: 600px; margin-top: 25px; }
+
+.table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+.table th { color: #9b3f3f; font-size: 12px; text-transform: uppercase; padding: 8px; text-align: left; border-bottom: 1px solid var(--color-border); }
+.table td { color: var(--color-text); font-weight: 600; padding: 8px; }
+.table-esp { word-spacing: 145px; line-height: 50px; font-weight: 700; color: var(--color-text); }
+
+.alltournaments { background-color: var(--color-section-bg); padding: 40px 50px; display: flex; justify-content: center; flex-direction: column; align-items: center; min-height: 400px; }
+.tournaments-grid { color: var(--color-text); display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1500px; width: 100%; }
+.tournament-card { background-color: var(--color-dark-card); padding: 25px; border-radius: var(--radius-xl); border: 1px solid var(--color-border); max-height: 700px; height: 100%; }
+.card-top { display: flex; justify-content: space-between; margin-bottom: 20px; }
+.game-tag { background-color: rgba(255, 97, 97, 0.356); color: var(--color-text); padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.live-tag { background-color: rgba(30, 60, 40, 0.4); color: var(--color-success); padding: 4px 10px; border-radius: 20px; font-size: 11px; border: 1px solid #1e3c28; }
+.tournament-card h3 { font-size: 20px; margin-bottom: 10px; }
+.players-count { color: #fffafa; font-size: 13px; margin-bottom: 15px; margin-top: 75px; }
+.rule { padding-top: 35px; }
+
+.progress-bar { width: 100%; height: 6px; background-color: #414040; border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background-color: var(--color-primary); border-radius: 2px; }
+
+.btn-signon { background: #ff57576c; margin-left: 450px; color: var(--color-dark); border: 1px solid #505050; padding: 12px; border-radius: var(--radius-lg); font-size: 22px; text-decoration: none; }
+.btn-signon:hover { background: #ff7d7d; }
+.full { text-align: center; background: #fd3737bb; margin-left: 450px; color: var(--color-dark); border: 1px solid #505050; padding: 12px; border-radius: 20px; font-size: 14px; text-decoration: none; }
+.invite { text-align: center; background: #24242434; margin-left: 450px; color: var(--color-text); border: 1px solid #ff7777; padding: 12px; border-radius: var(--radius-md); font-size: 14px; text-decoration: none; }
+.soon { background-color: rgba(79, 82, 255, 0.514); color: #121352; padding: 4px 10px; border-radius: 20px; font-size: 11px; border: 1px solid #1e3c28; }
+
+@media (max-width: 900px) {
+  .tournaments-grid { grid-template-columns: repeat(2, 1fr); }
+  .btn-signon, .full, .invite { margin-left: 0; }
+}
+@media (max-width: 600px) {
+  .tournaments-grid { grid-template-columns: 1fr; }
+  .divider1 { min-width: 100%; max-width: 100%; }
+}

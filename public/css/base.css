@@ -1,0 +1,448 @@
+/* ========================================
+   VictoryHub - Estilos Base
+   Estilos compartilhados em todas as páginas
+   ======================================== */
+
+/* Variáveis CSS */
+:root {
+  /* Cores */
+  --color-primary: #fc5757;
+  --color-primary-hover: #ff7d7d;
+  --color-dark: #000000;
+  --color-dark-card: #0e0c0c;
+  --color-dark-lighter: #1a1a1a;
+  --color-border: #111111;
+  --color-border-light: #141414;
+  --color-border-input: #333;
+  --color-text: #ffffff;
+  --color-text-muted: #888888;
+  --color-text-secondary: #a3a3a3;
+  --color-success: #4ade80;
+  --color-error: #f87171;
+  --color-section-bg: #ff808038;
+
+  /* Gradientes */
+  --gradient-navbar: linear-gradient(to right, #1f1919, #802a2a);
+
+  /* Tipografia */
+  --font-main: 'Poppins', sans-serif;
+  --font-headings: 'Bebas Neue', sans-serif;
+  --font-fallback: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* Espaçamentos */
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 40px;
+  --spacing-2xl: 80px;
+
+  /* Bordas Arredondadas */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 15px;
+
+  /* Transições */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+
+  /* Layout */
+  --max-width: 1200px;
+  --navbar-padding: 15px 60px;
+  --footer-padding: 80px 80px 50px 80px;
+}
+
+/* Importação das Fontes do Google */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* ========================================
+   Reset Universal
+   ======================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-main);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-fallback);
+  background-color: var(--color-dark);
+}
+
+/* ========================================
+   Estilos da Navbar
+   ======================================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--navbar-padding);
+  background: var(--gradient-navbar);
+  color: var(--color-text);
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.logo .icon {
+  background: transparent;
+  padding: 3px 6px;
+  border-radius: var(--radius-lg);
+}
+
+/* Links de Navegação */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: var(--spacing-xl);
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 14px;
+  transition: var(--transition-normal);
+}
+
+.nav-links a:hover {
+  color: var(--color-text);
+}
+
+.nav-links a.active {
+  background: var(--color-dark);
+  color: var(--color-text);
+  padding: 8px 18px;
+  border-radius: var(--radius-lg);
+}
+
+/* Botões de Login e Cadastro */
+.auth-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-login,
+.btn-signup {
+  text-decoration: none;
+  color: var(--color-text);
+  border: 1px solid #2a2a2a;
+  padding: 8px 22px;
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+  background: transparent;
+  transition: var(--transition-normal);
+}
+
+.btn-login:hover,
+.btn-signup:hover {
+  background: #141414;
+}
+
+/* ========================================
+   Estilos do Rodapé
+   ======================================== */
+.footer {
+  background-color: var(--color-dark);
+  padding: var(--footer-padding);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.footer-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-xl);
+}
+
+.logo-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.brand-name {
+  color: var(--color-text);
+}
+
+.copyright {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+.footer-desc {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  margin-bottom: 25px;
+  line-height: 1.4;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.social-box {
+  width: 35px;
+  height: 35px;
+  border: 1px solid var(--color-dark);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 14px;
+  transition: var(--transition-normal);
+}
+
+.social-box:hover {
+  border-color: #ffaa00;
+  background-color: #111;
+}
+
+.footer-columns {
+  display: flex;
+  gap: var(--spacing-2xl);
+}
+
+.footer-col h4 {
+  color: var(--color-text);
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+}
+
+.footer-col a {
+  display: block;
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 12px;
+  transition: var(--transition-fast);
+}
+
+.footer-col a:hover {
+  color: var(--color-text);
+}
+
+.made-by {
+  color: var(--color-text);
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+/* ========================================
+   Estilos dos Botões
+   ======================================== */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition-normal);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-dark);
+  padding: 15px 30px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  border: 1px solid var(--color-primary);
+  color: var(--color-text);
+  padding: 15px 30px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.btn-accent {
+  background-color: var(--color-primary);
+  color: var(--color-dark);
+}
+
+.btn-accent:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-lg {
+  padding: 14px 28px;
+  font-size: 16px;
+}
+
+/* ========================================
+   Estilos das Seções
+   ======================================== */
+.section-bg {
+  background-color: var(--color-section-bg);
+  padding: 40px 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ========================================
+   Estilos dos Cards
+   ======================================== */
+.card {
+  background-color: var(--color-dark-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 30px;
+  transition: var(--transition-normal);
+}
+
+/* ========================================
+   Utilitários de Tipografia
+   ======================================== */
+.section-title {
+  font-family: var(--font-headings);
+  font-size: 48px;
+  margin: 0;
+  letter-spacing: 2px;
+  color: var(--color-text);
+}
+
+.highlight {
+  color: var(--color-primary);
+}
+
+/* ========================================
+   Animação de Revelar
+   ======================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  animation: aparecer linear forwards;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   Media Queries - Design Responsivo
+   ======================================== */
+
+/* Tablets grandes e notebooks pequenos */
+@media (max-width: 1200px) {
+  :root {
+    --navbar-padding: 15px 40px;
+    --footer-padding: 60px 40px 40px 40px;
+  }
+
+  .nav-links {
+    gap: 25px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+  :root {
+    --navbar-padding: 15px 20px;
+    --footer-padding: 50px 20px 30px 20px;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 15px;
+  }
+
+  .footer-container,
+  .footer-columns {
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+
+  .section-title {
+    font-size: 36px;
+  }
+}
+
+/* Celulares */
+@media (max-width: 600px) {
+  :root {
+    --navbar-padding: 12px 15px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-links a.active {
+    padding: 6px 14px;
+  }
+
+  .auth-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .btn-login,
+  .btn-signup {
+    text-align: center;
+    width: 100%;
+  }
+
+  .footer-columns {
+    gap: var(--spacing-lg);
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+}
