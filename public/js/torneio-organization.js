@@ -1,87 +1,125 @@
-// Filtros torneios
-document.addEventListener('DOMContentLoaded', () => {
-    const botoesFiltro = document.querySelectorAll('.buttons a[data-game]');
-    const cardsTorneio = document.querySelectorAll('.tournament-card');
-
-    const botaoInicial = document.querySelector('.buttons a[data-game="Todos"]');
-    if (botaoInicial) {
-        botaoInicial.style.background = "#ff7c7c";
-        botaoInicial.style.color = "#000000";
+// Array de objetos 
+const listaTorneios = [
+    {
+        jogo: "CS2",
+        nome: "CS2 Championship Open",
+        descricao: "Torneio eliminatório simples para jogadores acima do rank Gold. Prove sua mira e tática e leve o grande prêmio.",
+        premio: "R$5.000",
+        formato: "Eliminatória",
+        rank: "Gold",
+        jogadoresAtuais: 96,
+        jogadoresTotais: 128,
+        regra: "Regra: 5v5 - Sem cheats - Sem Smurfs",
+        status: "Ao Vivo"
+    },
+    {
+        jogo: "Valorant",
+        nome: "Valorant Pro Series",
+        descricao: "Competição de alto nível para jogadores Diamond e acima. Grupos com 4 times e fase mata-mata.",
+        premio: "R$8.000",
+        formato: "Eliminatória",
+        rank: "Diamond",
+        jogadoresAtuais: 64,
+        jogadoresTotais: 64,
+        regra: "Regra: 5v5 - Sem cheats - 1 agente por pessoa",
+        status: "Ao Vivo"
+    },
+    {
+        jogo: "Marvel Rivals",
+        nome: "Marvels Rivals Cup",
+        descricao: "Torneio semanal de Marvel Rivals, aberto a todos os rankings. Ótima oportunidade para iniciantes ganharem experiência.",
+        premio: "R$1.500",
+        formato: "Eliminatória",
+        rank: "Qualquer",
+        jogadoresAtuais: 18,
+        jogadoresTotais: 36,
+        regra: "Regra: 6v6 - Sem repetição de heróis",
+        status: "Ao Vivo"
+    },
+    {
+        jogo: "COD",
+        nome: "CoD: Warzone - Invite Only",
+        descricao: "Torneio de Warzone exclusivo para convidados. Apenas os 16 melhores jogadores da plataforma no ranking mensal são elegíveis.",
+        premio: "R$3.000",
+        formato: "BattleRoyale",
+        rank: "16",
+        jogadoresAtuais: 0,
+        jogadoresTotais: 16,
+        regra: "Regra: Solo - Apenas top-16 do ranking",
+        status: "Em Breve"
     }
+];
 
-    botoesFiltro.forEach(botao => {
-        botao.addEventListener('click', (e) => {
-            e.preventDefault(); 
+function renderizarTela(filtro = "Todos") {
+    const container = document.getElementById('container-torneios');
+    if (!container) return;
 
-            botoesFiltro.forEach(b => {
-                b.style.background = "transparent";
-                b.style.color = "var(--color-text)";
-                b.style.borderColor = "#ff7c7c";
-            });
+    container.innerHTML = "";
 
-            botao.style.background = "#ff7c7c";
-            botao.style.color = "#000000";
-            botao.style.borderColor = "#ff7c7c";
-
-            const filtroSelecionado = botao.getAttribute('data-game');
-
-            cardsTorneio.forEach(card => {
-                const tagJogo = card.querySelector('.game-tag').textContent.trim();
-                const statusAoVivo = card.querySelector('.live-tag');
-
-                if (filtroSelecionado === "Todos") {
-                    card.style.display = "block"; 
-                } else if (filtroSelecionado === "Ao Vivo") {
-                    if (statusAoVivo && statusAoVivo.textContent.includes("Ao Vivo")) {
-                        card.style.display = "block";
-                    } else {
-                        card.style.display = "none"; 
-                    }
-                } else if (tagJogo.toLowerCase() === filtroSelecionado.toLowerCase()) {
-                    card.style.display = "block";
-                } else {
-                    card.style.display = "none";
-                }
-            });
-        });
+    const torneiosFiltrados = listaTorneios.filter(torneio => {
+        if (filtro === "Todos") return true;
+        if (filtro === "Ao Vivo") return torneio.status === "Ao Vivo";
+        return torneio.jogo.toLowerCase() === filtro.toLowerCase();
     });
 
-    iniciarPollingVagas(cardsTorneio);
-});
-// Pooling
-function iniciarPollingVagas(cardsTorneio) {
-    setInterval(() => {
-        cardsTorneio.forEach(card => {
-            const elementoContador = card.querySelector('.players-count');
-            const elementoPreenchimento = card.querySelector('.progress-fill');
+    torneiosFiltrados.forEach(torneio => {
+        const porcentagem = (torneio.jogadoresAtuais / torneio.jogadoresTotais) * 100;
 
-            if (!elementoContador || !elementoPreenchimento) return;
-
-            const numeros = elementoContador.textContent.match(/\d+/g);
-            if (!numeros || numeros.length < 2) return;
-
-            let atuais = parseInt(numeros[0]);
-            const totais = parseInt(numeros[1]);
-
-            if (atuais < totais) {
-                const novaInscricao = Math.random() > 0.7; 
-                if (novaInscricao) {
-                    atuais += 1;
-                    elementoContador.textContent = `👥 ${atuais} / ${totais} jogadores`;
-
-                    const novaPorcentagem = (atuais / totais) * 100;
-                    elementoPreenchimento.style.width = `${novaPorcentagem}%`;
-
-                    if (atuais === totais) {
-                        const btnSignon = card.querySelector('.btn-signon');
-                        if (btnSignon) {
-                            btnSignon.className = "full";
-                            btnSignon.textContent = "Vagas Esgotadas";
-                            btnSignon.style.pointerEvents = "none"; 
-                        }
-                    }
+        const cardHTML = `
+            <div class="tournament-card">
+                <div class="card-top">
+                    <span class="game-tag">${torneio.jogo}</span>
+                    <span class="${torneio.status === 'Ao Vivo' ? 'live-tag' : 'soon'}">
+                        ${torneio.status === 'Ao Vivo' ? '● Ao Vivo' : 'Em Breve'}
+                    </span>
+                </div>
+                <h3>${torneio.nome}</h3>
+                <p class="description">${torneio.descricao}</p>
+                <hr class="divider1">
+                <table class="table">
+                    <tr><td>Premio Formato Rank</td></tr>
+                </table>
+                <table class="table-esp">
+                    <tr><td>${torneio.premio} ${torneio.formato} ${torneio.rank}</td></tr>
+                </table>
+                <hr class="divider1">
+                <p class="players-count">👥 ${torneio.jogadoresAtuais} / ${torneio.jogadoresTotais} jogadores</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${porcentagem}%;"></div>
+                </div>
+                <p class="rule">${torneio.regra}</p>
+                
+                ${torneio.jogadoresAtuais === torneio.jogadoresTotais 
+                    ? '<div class="full">Vagas Esgotadas</div>' 
+                    : torneio.status === 'Em Breve' 
+                        ? '<div class="invite">Convite Necessário</div>'
+                        : '<a href="#" class="btn-signon">Inscrever-se</a>'
                 }
-            }
-        });
-    }, 5000); 
+            </div>
+        `;
+
+        container.innerHTML += cardHTML;
+    });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderizarTela("Todos");
+
+    const botoes = document.querySelectorAll('.buttons a[data-game]');
+    
+    botoes.forEach(botao => {
+        botao.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            botoes.forEach(b => {
+                b.style.background = "transparent";
+                b.style.color = "var(--color-text)";
+            });
+            botao.style.background = "#ff7c7c";
+            botao.style.color = "#000000";
+
+            const jogoEscolhido = botao.getAttribute('data-game');
+            renderizarTela(jogoEscolhido);
+        });
+    });
+});
