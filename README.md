@@ -1,117 +1,72 @@
+# VictoryHub
 
-## Parte 1: Dados do Grupo
+Arena competitiva de **matchmaking + torneios** para jogos competitivos (CS2, Valorant,
+Marvel Rivals, COD). Reconstrução do projeto legado (`Project_Happy_Game`) em uma stack
+moderna, mantendo a identidade visual (tema dark + vermelho `#fc5757`, Bebas Neue/Poppins).
 
-Tales Alves Dias - rm568839  
-Danilo Ricco Rosa - rm571585  
-Leonardo Theodoro Moraes - rm570853  
-Henzo Weelthyner Chaves Santos - rm571575  
-## Parte 2: Concepção e Planejamento
+## Stack
 
-#### Tema do Projeto -
-- **Sistema de matchmaking automatico que une jogadores que querem jogar competitivamente em torneios** 
-#### Funcionalidades do Projeto -  
-- **Atraves de uma plataforma, jogadores que almeijam ganhar dinheiro jogando jogos competitivos podem participar de torneios por meio de um matchmaking**
-- **Cada jogador vai ter um 'rank' onde o algoritmo vai buscar jogadores com um rank proximo, tornando partidas mais justas**
-- **Cada torneio vai possuir as suas regras especificas**
-- **A plataforma vai conter um sistema de moedas, onde o usuario pode trocar por itens de jogos ou dinheiro real**
-#### Publico-Alvo -
-- **Jogadores de jogos competitivos (Counter-Strike 2, Valorant, Marvel Rivals, Call of Duty etc)**
-#### Cronograma -
-- *Ver arquivo cronograma_victoryhub.pdf*
+- **Next.js 16** (App Router) + **TypeScript** + **Tailwind CSS v4**
+- **PostgreSQL + Prisma** (ORM)
+- **Auth.js / NextAuth v5** — login/cadastro (Credentials + bcrypt), sessão JWT
+- **Steam Web API** + **Steam OpenID 2.0** — vínculo de conta Steam ao usuário
 
-## Parte 3: Reflexão sobre Software e Hardware
+## Páginas
 
-#### Requisitos Técnicos -
+| Rota | Descrição |
+|------|-----------|
+| `/` | Home — hero, stats, features, preview de torneios, CTA |
+| `/torneios` | Lista de torneios **dinâmica** (fetch + useEffect) com filtros |
+| `/sobre` | História, timeline, objetivos e criadores |
+| `/contato` | Formulário de contato (validação + persistência) |
+| `/feedback` | Animação de sucesso + countdown |
+| `/login` · `/cadastro` | Autenticação |
+| `/dashboard` | (auth) Perfil + dados Steam vinculados (jogos, horas, stats CS2) |
 
-- **Sistema Operacional capaz de rodar qualquer navegador web moderno (Google Chrome, Firefox, Brave, Edge etc)**
-- **Como a plataforma vai servir de intermedio entre jogadores não é necessario possuir nenhum hardware potente**
-- **Como requisito implicito, cada jogo promovido pela plataforma irá ter seus proprios requisitos técnicos (A plataforma divulgará quais são)**
+## Setup
 
-## Parte 4: Utilidade nos Sistemas de Informação
+```bash
+npm install
+cp .env.example .env      # preencha as variáveis (veja abaixo)
+npm run dev               # http://localhost:3000
+```
 
-### 1. Utilidade da aplicação para Sistemas de Informação
+A app **roda sem banco** para demonstração: a página de torneios cai num fallback de dados
+mock (`src/lib/tournaments.mock.ts`) e o formulário de contato aceita o envio. Login,
+inscrição em torneios e dashboard exigem `DATABASE_URL`.
 
-- #### Que **dados** o sistema coleta?
-	- Email do usuário
-	- Endereço IP
-	- Contas vinculadas a plataformas de jogos (Steam, Epic Games, GoG, Battle.net)
-	- Histórico de partidas
-	- Estatísticas de desempenho do jogador (vitórias, derrotas, kills, ranking)
-	- Histórico de apostas ou participação em torneios
-	- Dados de acesso (horário de login, frequência de uso)
+### Variáveis de ambiente
 
-- #### Como esses dados são **transformados em informação útil**?
-	- O **histórico de partidas** é transformado em estatísticas de desempenho do jogador, como taxa de vitória, ranking ou nível de habilidade.
-	- O **endereço IP e os dados de acesso** podem ser utilizados para identificar padrões de uso, possíveis fraudes ou múltiplas contas.
-	- As **contas vinculadas a plataformas de jogos** permitem verificar a identidade do jogador e integrar informações sobre partidas realizadas.    
-	- O **histórico de torneios e apostas** gera relatórios sobre popularidade de eventos, volume de apostas e engajamento da comunidade.
+| Variável | Para quê |
+|----------|----------|
+| `DATABASE_URL` | Conexão Postgres (Neon/Supabase). Necessária para auth/inscrição/dashboard. |
+| `AUTH_SECRET` | Segredo do NextAuth — gere com `npx auth secret`. |
+| `AUTH_URL` / `NEXT_PUBLIC_BASE_URL` | URL base (callbacks Steam/OAuth). |
+| `STEAM_API_KEY` | Chave da Steam Web API ([obter aqui](https://steamcommunity.com/dev/apikey)). Server-only. |
 
-- #### Quem **usa essas informações**?
-	- **Administradores da plataforma**, para monitorar o funcionamento do sistema e gerenciar torneios e atividades.
-	- **Jogadores**, para acompanhar suas estatísticas, desempenho e histórico de partidas.
-	- **Equipe de gestão ou desenvolvimento**, para analisar o crescimento da plataforma e melhorar funcionalidades.
+### Banco de dados (quando tiver `DATABASE_URL`)
 
-- #### Que **decisões podem ser tomadas com elas**?
-	- Criar novos torneios com base nos jogos mais populares.
-	- Ajustar regras ou formatos de competição para melhorar a experiência dos jogadores.
-	- Detectar e prevenir fraudes ou comportamentos suspeitos.
-	- Melhorar o sistema de matchmaking entre jogadores com níveis semelhantes.
-	- Planejar estratégias de crescimento da plataforma e engajamento da comunidade.
+```bash
+npm run db:migrate    # cria as tabelas
+npm run db:seed       # popula os 4 torneios
+npm run db:studio     # inspeciona os dados (Prisma Studio)
+```
 
-### 2. Tipo de Sistema de Informação
+## Scripts
 
-##### Sistemas Operacionais (TPS – Transaction Processing Systems)
+- `npm run dev` / `npm run build` / `npm run start`
+- `npm run db:generate | db:migrate | db:push | db:seed | db:studio`
 
-*Por conta do volume de dados que precisam ser processados, ter sistema de vendas, pagamentos etc*
+## Arquitetura
 
-### 3. Relação com a Cadeia de Valor
-
-| *Etapa*       | *Atividade*                                            |
-| ------------- | ------------------------------------------------------ |
-| Entrada       | Coleta de dados dos jogadores                          |
-| Processamento | Análise e cálculo de estatísticas                      |
-| Armazenamento | Registro em banco de dados                             |
-| Distribuição  | Apresentação de rankings, resultados e relatórios      |
-| Valor         | Melhor experiência competitiva e decisões estratégicas |
-
-### 4. Uso Estratégico da Informação
-
-- Identificar trends de jogos (Quais jogos estão mais na moda)
-- Identificar quais formatos competitivos são mais utilizados
-- Identificar comportamento do usuario na plataforma, oferencendo campanhas, eventos, recompensas dependendo da atividade do usuario
-- Previnir Fraudes com base em informações como: endereço IP, bans de contas, comportamento suspeito
-- Definir estrategias de marketing para atrair novos usuários
-
-## Parte 5: Desenvolvimento
-
-#### Home Page - 
-
-- Banner + Logo do VictoryHub
-- Slogan Chamativo
-- Botão de participar de um torneio
-
-#### Tournament Page (Torneios) -
-
-- Listar os Torneios Ativos (Deixar Estático por enquanto)
-- Listar quantidade de jogadores em cada Torneio
-
-#### About Page (Sobre Nos) -
-
-- Contar a historia do projeto
-- Contar sobre os criadores do projeto
-- Objetivos do Projeto
-
-#### Contact Page (Contato) -
-
-- Formulario de contato que envia um email para os desenvolvedores
-- Link para contato no Whatsapp (Futuramente)
-
-#### Feedback Page (Redirect)
-
-- Executar alguma animação de sucesso
-- Exibir uma mensagem de agradecimento
-
-
-
-
-
+- **Rotas de API** (`src/app/api/**`, server-only):
+  `auth/[...nextauth]`, `auth/signup`, `tournaments`, `tournaments/[id]/register`,
+  `steam/link`, `steam/callback`, `steam/sync`, `contact`.
+- **Steam**: vínculo via OpenID (`src/lib/steam-openid.ts`) com verificação
+  `check_authentication`; dados via Steam Web API (`src/lib/steam.ts`), cacheados em
+  `SteamAccount`. A `STEAM_API_KEY` nunca é exposta ao client.
+- **Auth**: config edge-safe (`src/auth.config.ts`) para o middleware + config completa
+  (`src/auth.ts`) com Prisma adapter e Credentials. `/dashboard` é protegido por
+  `middleware.ts` e por guard no `dashboard/layout.tsx`.
+- **Design system**: tokens em `src/app/globals.css` (`@theme`), componentes reutilizáveis
+  em `src/components/` (Navbar, Footer, Button, Card, Badge, ProgressBar, TournamentCard…).

@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+/* ========================================================================
+   VictoryHub — Design System (portado do Project_Happy_Game)
+   Tokens expostos como utilitários Tailwind v4 via @theme.
+   ======================================================================== */
+@theme {
+  /* Cores */
+  --color-primary: #fc5757;
+  --color-primary-hover: #ff7d7d;
+  --color-accent: #ff3434;
+  --color-dark: #000000;
+  --color-dark-card: #0e0c0c;
+  --color-dark-lighter: #1a1a1a;
+  --color-border: #111111;
+  --color-border-light: #141414;
+  --color-border-input: #333333;
+  --color-content: #ffffff;
+  --color-muted: #888888;
+  --color-secondary: #a3a3a3;
+  --color-success: #4ade80;
+  --color-error: #f87171;
+
+  /* Raios */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 15px;
+
+  /* Fontes (variáveis injetadas pelo next/font no layout) */
+  --font-sans: var(--font-poppins), "Segoe UI", Tahoma, sans-serif;
+  --font-display: var(--font-bebas), "Segoe UI", sans-serif;
+}
+
+/* Reset / base */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-dark);
+  color: var(--color-content);
+  font-family: var(--font-sans);
+}
+
+/* Gradientes reutilizáveis (não há utilitário nativo p/ multi-stop nomeado) */
+.bg-navbar-gradient {
+  background: linear-gradient(to right, #1f1919, #802a2a);
+}
+.bg-hero-gradient {
+  background: radial-gradient(circle at 70% 50%, rgba(212, 163, 115, 0.15), transparent 40%),
+    linear-gradient(90deg, #0a0a0a 40%, #1a0f0a 100%);
+}
+.bg-section-tint {
+  background-color: #ff808038;
+}
+.progress-gradient {
+  background: linear-gradient(90deg, #ff3434, #ff7b7b);
+}
+
+/* Tipografia utilitária */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+/* Animação de revelar no scroll (scroll-driven, igual ao legado) */
+@supports (animation-timeline: view()) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(48px);
+    animation: reveal-up linear forwards;
+    animation-timeline: view();
+    animation-range: entry 0% cover 28%;
+  }
+}
+@keyframes reveal-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Animações da página de Feedback (portadas do legado) ---- */
+.fb-card {
+  opacity: 0;
+  transform: translateY(32px) scale(0.97);
+  animation: fb-appear 0.6s ease forwards;
+}
+@keyframes fb-appear {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.fb-ring {
+  border-top-color: #34d399;
+  animation: fb-ring-spin 0.8s ease forwards;
+}
+@keyframes fb-ring-spin {
+  0% { transform: rotate(0deg); opacity: 1; }
+  80% { transform: rotate(360deg); opacity: 1; }
+  100% { transform: rotate(360deg); opacity: 0; }
+}
+.fb-check {
+  stroke-dasharray: 52;
+  stroke-dashoffset: 52;
+  animation: fb-draw 0.5s ease 0.7s forwards;
+}
+@keyframes fb-draw {
+  to { stroke-dashoffset: 0; }
+}
+.fb-countdown {
+  transform-origin: left;
+  animation: fb-shrink 5s linear 0.6s forwards;
+}
+@keyframes fb-shrink {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+.fb-particle {
+  animation: fb-burst 0.9s ease var(--delay, 0.6s) forwards;
+}
+@keyframes fb-burst {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% {
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0);
+    opacity: 0;
+  }
+}
