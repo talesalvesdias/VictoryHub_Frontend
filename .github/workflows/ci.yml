@@ -1,0 +1,61 @@
+name: CI
+
+# Barreira de qualidade: roda em todo push no main e em todo Pull Request.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  quality:
+    name: Lint · Typecheck · Build
+    runs-on: ubuntu-latest
+
+    # Postgres real para validar as migrations do Prisma no CI.
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: vh
+          POSTGRES_PASSWORD: vh
+          POSTGRES_DB: vh_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgresql://vh:vh@localhost:5432/vh_test?schema=public
+      AUTH_SECRET: ci-dummy-secret-not-used-in-prod
+      AUTH_URL: http://localhost:3000
+      NEXT_PUBLIC_BASE_URL: http://localhost:3000
+      # STEAM_API_KEY intencionalmente vazia — o build não depende dela.
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Gerar Prisma Client
+        run: npx prisma generate
+
+      - name: Aplicar migrations (valida o schema)
+        run: npx prisma migrate deploy
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build

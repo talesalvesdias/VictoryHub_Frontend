@@ -1,0 +1,57 @@
+name: Deploy (Vercel)
+
+# Deploy dinâmico: preview por Pull Request, produção ao entrar no main.
+# Requer os secrets do repositório: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verificar secrets do Vercel
+        id: guard
+        run: |
+          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
+            echo "::warning::VERCEL_TOKEN não configurado — pulando deploy. Veja docs/CICD.md."
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.guard.outputs.ok == 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.guard.outputs.ok == 'true'
+        with:
+          node-version: 20
+
+      - name: Instalar Vercel CLI
+        if: steps.guard.outputs.ok == 'true'
+        run: npm install --global vercel@latest
+
+      - name: Deploy de preview (Pull Requests)
+        if: steps.guard.outputs.ok == 'true' && github.ref != 'refs/heads/main'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          vercel pull --yes --environment=preview --token="$VERCEL_TOKEN"
+          vercel build --token="$VERCEL_TOKEN"
+          vercel deploy --prebuilt --token="$VERCEL_TOKEN"
+
+      - name: Deploy de produção (main)
+        if: steps.guard.outputs.ok == 'true' && github.ref == 'refs/heads/main'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+          vercel build --prod --token="$VERCEL_TOKEN"
+          vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN"
