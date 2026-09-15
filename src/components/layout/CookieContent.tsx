@@ -3,35 +3,39 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-type CookieConsent = "accepted" | "rejected" | null;
+type CookieConsent = "accepted" | "rejected";
+
+const COOKIE_CONSENT_KEY = "victoryhub-cookie-consent";
 
 export default function CookieConsent() {
-  const [consent, setConsent] = useState<CookieConsent>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    const savedConsent = localStorage.getItem(
-      "victoryhub-cookie-consent"
-    ) as CookieConsent;
+    const savedConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
 
-    setConsent(savedConsent);
-    setIsLoaded(true);
+    // Só precisamos mostrar o banner se nenhuma escolha válida existir.
+    if (savedConsent !== "accepted" && savedConsent !== "rejected") {
+      // Agenda a atualização para depois do efeito.
+      queueMicrotask(() => {
+        setShowBanner(true);
+      });
+    }
   }, []);
 
-  function handleConsent(choice: "accepted" | "rejected") {
-    localStorage.setItem("victoryhub-cookie-consent", choice);
-    setConsent(choice);
+  function handleConsent(choice: CookieConsent) {
+    localStorage.setItem(COOKIE_CONSENT_KEY, choice);
+
+    // Fecha imediatamente o banner.
+    setShowBanner(false);
   }
 
-  // Evita o banner aparecer rapidamente antes de ler o localStorage
-  if (!isLoaded || consent !== null) {
+  if (!showBanner) {
     return null;
   }
 
   return (
     <div className="fixed bottom-0 left-0 z-50 w-full border-t border-border-light bg-dark px-5 py-4 shadow-2xl md:px-10 lg:px-20">
       <div className="mx-auto flex max-w-300 flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-        
         <div className="max-w-3xl">
           <h3 className="mb-1 text-sm font-semibold text-primary">
             🍪 Política de Cookies 🍪
@@ -42,12 +46,12 @@ export default function CookieConsent() {
             analisar o uso da plataforma e oferecer funcionalidades
             personalizadas. Você pode aceitar ou recusar cookies opcionais.
             Consulte nossa{" "}
-            <a
+            <Link
               href="/cookies"
-              className="text-white underline hover:text-primary-hover"
+              className="text-white underline transition-colors hover:text-primary-hover"
             >
               Política de Cookies
-            </a>
+            </Link>
             .
           </p>
         </div>
