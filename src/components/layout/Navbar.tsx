@@ -14,7 +14,7 @@ export default function Navbar() {
 
   return (
     <header className="bg-navbar-gradient text-content">
-      <nav className="flex flex-wrap items-center justify-between gap-4 px-5 py-4 md:px-10 lg:px-[60px]">
+      <nav className="flex flex-wrap items-center justify-between gap-4 px-5 py-4 md:px-10 lg:px-15">
         <Link href="/" className="flex items-center gap-2.5 font-bold tracking-wider">
           <Image src="/logo.png" alt="VictoryHub" width={25} height={25} priority />
           <span>VictoryHUB</span>
@@ -29,7 +29,7 @@ export default function Navbar() {
                   href={link.href}
                   className={cn(
                     "text-sm transition-colors duration-300 hover:text-primary",
-                    active && "rounded-lg bg-dark px-[18px] py-2 hover:text-content",
+                    active && "rounded-lg bg-dark px-4.5 py-2 hover:text-content",
                   )}
                 >
                   {link.label}

@@ -16,7 +16,7 @@ export default function Home() {
     <>
       {/* HERO */}
       <section className="bg-hero-gradient px-6 py-20 md:px-12 md:py-24">
-        <div className="mx-auto grid max-w-[1200px] items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="mx-auto grid max-w-300 items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="order-2 lg:order-1">
             <p className="mb-2.5 text-xs font-bold tracking-[2px]">
               ARENA COMPETITIVA #1 DO BRASIL
@@ -66,7 +66,7 @@ export default function Home() {
 
       {/* FEATURES */}
       <section className="bg-section-tint px-6 py-12 md:px-12">
-        <div className="mx-auto grid max-w-[1200px] gap-5 md:grid-cols-3">
+        <div className="mx-auto grid max-w-300 gap-5 md:grid-cols-3">
           {FEATURES.map((f) => (
             <Card key={f.title} hover className="reveal">
               <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-md border border-[#3d2e20] bg-dark-card text-xl">
@@ -81,7 +81,7 @@ export default function Home() {
 
       {/* TORNEIOS PREVIEW */}
       <section className="bg-dark px-6 py-20 md:px-12">
-        <div className="mx-auto max-w-[1200px]">
+        <div className="mx-auto max-w-300">
           <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <p className="text-xs font-bold tracking-[2px] text-primary">AO VIVO AGORA</p>

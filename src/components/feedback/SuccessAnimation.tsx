@@ -41,7 +41,7 @@ export default function SuccessAnimation({
 
   return (
     <div className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-dark px-5 py-20">
-      <span className="pointer-events-none absolute h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(252,87,87,0.08),transparent_70%)]" />
+      <span className="pointer-events-none absolute h-125 w-125 rounded-full bg-[radial-gradient(circle,rgba(252,87,87,0.08),transparent_70%)]" />
 
       {/* Partículas */}
       {particles.map((p, i) => (
@@ -61,9 +61,9 @@ export default function SuccessAnimation({
         />
       ))}
 
-      <div className="fb-card relative z-10 w-full max-w-lg rounded-[15px] border border-border bg-dark-card p-12 text-center sm:p-14">
+      <div className="fb-card relative z-10 w-full max-w-lg rounded-xl border border-border bg-dark-card p-12 text-center sm:p-14">
         {/* Checkmark animado */}
-        <div className="relative mx-auto mb-7 flex h-[88px] w-[88px] items-center justify-center rounded-full border-2 border-[rgba(52,211,153,0.2)] bg-[rgba(52,211,153,0.08)]">
+        <div className="relative mx-auto mb-7 flex h-22 w-22 items-center justify-center rounded-full border-2 border-[rgba(52,211,153,0.2)] bg-[rgba(52,211,153,0.08)]">
           <span className="fb-ring absolute -inset-2 rounded-full border-2 border-transparent" />
           <svg
             className="h-10 w-10 text-[#34d399]"
@@ -97,7 +97,7 @@ export default function SuccessAnimation({
           <p className="mb-2.5 text-xs text-muted">
             Redirecionando para a página inicial em {count} segundo{count === 1 ? "" : "s"}...
           </p>
-          <div className="h-[3px] overflow-hidden rounded-full bg-dark-lighter">
+          <div className="h-0.75 overflow-hidden rounded-full bg-dark-lighter">
             <div className="fb-countdown progress-gradient h-full rounded-full" />
           </div>
         </div>
