@@ -1,11 +1,10 @@
-import NextAuth from "next-auth";
-import { authConfig } from "@/auth.config";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-// Instância edge-safe (sem Prisma/bcrypt) só para proteger rotas.
-export const { auth: middleware } = NextAuth(authConfig);
-
-export default middleware;
+export function middleware(request: NextRequest) {
+  return NextResponse.next();
+}
 
 export const config = {
-  matcher: ["/dashboard/:path*"],
+  matcher: [],
 };
