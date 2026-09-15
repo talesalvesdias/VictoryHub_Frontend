@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useLayoutEffect, useState } from "react";
 
 type CookieConsent = "accepted" | "rejected" | null;
 
@@ -9,7 +8,7 @@ export default function CookieConsent() {
   const [consent, setConsent] = useState<CookieConsent>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const savedConsent = localStorage.getItem(
       "victoryhub-cookie-consent"
     ) as CookieConsent;
