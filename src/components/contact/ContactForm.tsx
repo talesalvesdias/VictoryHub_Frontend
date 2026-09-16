@@ -66,8 +66,15 @@ export default function ContactForm() {
           <label className={labelClass} htmlFor="nome">
             Nome *
           </label>
-          <input className={fieldClass} id="nome" name="nome" placeholder="Seu nome completo" />
-          {errors.nome && <p className="mt-1 text-xs text-error">{errors.nome}</p>}
+          <input
+            className={fieldClass}
+            id="nome"
+            name="nome"
+            placeholder="Seu nome completo"
+            aria-invalid={Boolean(errors.nome)}
+            aria-describedby={errors.nome ? "nome-error" : undefined}
+          />
+          {errors.nome && <p id="nome-error" role="alert" className="mt-1 text-xs text-error">{errors.nome}</p>}
         </div>
         <div>
           <label className={labelClass} htmlFor="email">
@@ -79,8 +86,10 @@ export default function ContactForm() {
             name="email"
             type="email"
             placeholder="seu@email.com"
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? "contato-email-error" : undefined}
           />
-          {errors.email && <p className="mt-1 text-xs text-error">{errors.email}</p>}
+          {errors.email && <p id="contato-email-error" role="alert" className="mt-1 text-xs text-error">{errors.email}</p>}
         </div>
       </div>
 
@@ -89,7 +98,14 @@ export default function ContactForm() {
           <label className={labelClass} htmlFor="assunto">
             Assunto *
           </label>
-          <select className={fieldClass} id="assunto" name="assunto" defaultValue="">
+          <select
+            className={fieldClass}
+            id="assunto"
+            name="assunto"
+            defaultValue=""
+            aria-invalid={Boolean(errors.assunto)}
+            aria-describedby={errors.assunto ? "assunto-error" : undefined}
+          >
             <option value="" disabled>
               Selecione um assunto
             </option>
@@ -99,7 +115,7 @@ export default function ContactForm() {
               </option>
             ))}
           </select>
-          {errors.assunto && <p className="mt-1 text-xs text-error">{errors.assunto}</p>}
+          {errors.assunto && <p id="assunto-error" role="alert" className="mt-1 text-xs text-error">{errors.assunto}</p>}
         </div>
         <div>
           <label className={labelClass} htmlFor="type">
@@ -124,11 +140,13 @@ export default function ContactForm() {
           id="mensagem"
           name="mensagem"
           placeholder="Descreva sua dúvida ou sugestão em detalhes..."
+          aria-invalid={Boolean(errors.mensagem)}
+          aria-describedby={errors.mensagem ? "mensagem-error" : undefined}
         />
-        {errors.mensagem && <p className="mt-1 text-xs text-error">{errors.mensagem}</p>}
+        {errors.mensagem && <p id="mensagem-error" role="alert" className="mt-1 text-xs text-error">{errors.mensagem}</p>}
       </div>
 
-      {serverError && <p className="text-sm text-error">{serverError}</p>}
+      {serverError && <p role="alert" aria-live="assertive" className="text-sm text-error">{serverError}</p>}
 
       <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs text-muted">
