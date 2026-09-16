@@ -47,6 +47,45 @@ body {
   font-family: var(--font-sans);
 }
 
+
+/* Acessibilidade: link de salto e indicador de foco global (WCAG 2.4.1 / 2.4.7) */
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 9999;
+  transform: translateY(-200%);
+  border-radius: 0.5rem;
+  background: var(--color-content);
+  color: var(--color-dark);
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid var(--color-primary-hover);
+  outline-offset: 3px;
+}
+
+/* Respeita a preferência do sistema por movimento reduzido (WCAG 2.3.3). */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal, .fb-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .fb-particle, .fb-ring { display: none !important; }
+}
+
 /* Gradientes reutilizáveis (não há utilitário nativo p/ multi-stop nomeado) */
 .bg-navbar-gradient {
   background: linear-gradient(to right, #1f1919, #802a2a);

@@ -27,6 +27,7 @@ export default function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
+                  aria-current={active ? "page" : undefined}
                   className={cn(
                     "text-sm transition-colors duration-300 hover:text-primary",
                     active && "rounded-lg bg-dark px-4.5 py-2 hover:text-content",
