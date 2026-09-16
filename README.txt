@@ -1,5 +1,4 @@
 Nome do Projeto: VictoryHub
-Documentação: VictoryHub_Documentacao
-Cronograma: VictoryHub_Cronograma
-Link do Vídeo: https://youtu.be/OaETWm9YKJM
-Link do Github: https://github.com/talesalvesdias/Project_Happy_Game
+Documentação: VictoryHub_Fase5
+Link do Vídeo: https://youtu.be/4P7W5dvppUU
+Link do Github: https://github.com/talesalvesdias/VictoryHub_Frontend
