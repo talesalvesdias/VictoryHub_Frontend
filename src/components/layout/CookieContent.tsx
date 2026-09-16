@@ -1,29 +1,42 @@
 "use client";
 
-import { useLayoutEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 type CookieConsent = "accepted" | "rejected" | null;
+const COOKIE_CONSENT_KEY = "victoryhub-cookie-consent";
+const CONSENT_CHANGE_EVENT = "victoryhub-cookie-consent-change";
+
+function getConsent(): CookieConsent {
+  const savedConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
+
+  return savedConsent === "accepted" || savedConsent === "rejected"
+    ? savedConsent
+    : null;
+}
+
+function subscribeToConsent(callback: () => void) {
+  window.addEventListener("storage", callback);
+  window.addEventListener(CONSENT_CHANGE_EVENT, callback);
+
+  return () => {
+    window.removeEventListener("storage", callback);
+    window.removeEventListener(CONSENT_CHANGE_EVENT, callback);
+  };
+}
 
 export default function CookieConsent() {
-  const [consent, setConsent] = useState<CookieConsent>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useLayoutEffect(() => {
-    const savedConsent = localStorage.getItem(
-      "victoryhub-cookie-consent"
-    ) as CookieConsent;
-
-    setConsent(savedConsent);
-    setIsLoaded(true);
-  }, []);
+  const consent = useSyncExternalStore(
+    subscribeToConsent,
+    getConsent,
+    () => null
+  );
 
   function handleConsent(choice: "accepted" | "rejected") {
-    localStorage.setItem("victoryhub-cookie-consent", choice);
-    setConsent(choice);
+    localStorage.setItem(COOKIE_CONSENT_KEY, choice);
+    window.dispatchEvent(new Event(CONSENT_CHANGE_EVENT));
   }
 
-  // Evita o banner aparecer rapidamente antes de ler o localStorage
-  if (!isLoaded || consent !== null) {
+  if (consent !== null) {
     return null;
   }
 
