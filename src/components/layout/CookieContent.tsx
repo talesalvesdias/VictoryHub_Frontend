@@ -1,35 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useSyncExternalStore } from "react";
 
-type CookieConsent = "accepted" | "rejected";
-
+type CookieConsent = "accepted" | "rejected" | null;
 const COOKIE_CONSENT_KEY = "victoryhub-cookie-consent";
+const CONSENT_CHANGE_EVENT = "victoryhub-cookie-consent-change";
+
+function getConsent(): CookieConsent {
+  const savedConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
+
+  return savedConsent === "accepted" || savedConsent === "rejected"
+    ? savedConsent
+    : null;
+}
+
+function subscribeToConsent(callback: () => void) {
+  window.addEventListener("storage", callback);
+  window.addEventListener(CONSENT_CHANGE_EVENT, callback);
+
+  return () => {
+    window.removeEventListener("storage", callback);
+    window.removeEventListener(CONSENT_CHANGE_EVENT, callback);
+  };
+}
 
 export default function CookieConsent() {
-  const [showBanner, setShowBanner] = useState(false);
+  const consent = useSyncExternalStore(
+    subscribeToConsent,
+    getConsent,
+    () => null
+  );
 
-  useEffect(() => {
-    const savedConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
-
-    // Só precisamos mostrar o banner se nenhuma escolha válida existir.
-    if (savedConsent !== "accepted" && savedConsent !== "rejected") {
-      // Agenda a atualização para depois do efeito.
-      queueMicrotask(() => {
-        setShowBanner(true);
-      });
-    }
-  }, []);
-
-  function handleConsent(choice: CookieConsent) {
+  function handleConsent(choice: "accepted" | "rejected") {
     localStorage.setItem(COOKIE_CONSENT_KEY, choice);
-
-    // Fecha imediatamente o banner.
-    setShowBanner(false);
+    window.dispatchEvent(new Event(CONSENT_CHANGE_EVENT));
   }
 
-  if (!showBanner) {
+  if (consent !== null) {
     return null;
   }
 

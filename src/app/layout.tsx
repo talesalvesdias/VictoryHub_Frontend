@@ -31,8 +31,11 @@ export default function RootLayout({
     <html lang="pt-br" className={`${poppins.variable} ${bebas.variable} h-full`}>
       <body className="min-h-full flex flex-col antialiased">
         <Providers>
+          <a href="#conteudo-principal" className="skip-link">
+            Ir para o conteúdo principal
+          </a>
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main id="conteudo-principal" tabIndex={-1} className="flex-1">{children}</main>
           <Footer />
         </Providers>
       </body>
