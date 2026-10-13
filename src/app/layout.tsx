@@ -4,6 +4,7 @@ import "./globals.css";
 import Providers from "@/components/Providers";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import ChatWidget from "@/components/chat/ChatWidget";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -37,6 +38,7 @@ export default function RootLayout({
           <Navbar />
           <main id="conteudo-principal" tabIndex={-1} className="flex-1">{children}</main>
           <Footer />
+          <ChatWidget />
         </Providers>
       </body>
     </html>

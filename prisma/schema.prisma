@@ -114,6 +114,17 @@ model ContactMessage {
   createdAt DateTime    @default(now())
 }
 
+// Contador do rate limit do chatbot, por janela fixa.
+// key = "ip:<hash>" | "user:<id>" | "global" — nunca o IP em claro.
+model ChatUsage {
+  key         String
+  windowStart DateTime
+  count       Int      @default(0)
+
+  @@id([key, windowStart])
+  @@index([windowStart])
+}
+
 // ---- Tabelas do adapter NextAuth ----
 model Account {
   id                String  @id @default(cuid())

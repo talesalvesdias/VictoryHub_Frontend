@@ -27,6 +27,23 @@ export async function getTournaments(q: TournamentQuery = {}): Promise<Tournamen
   }
 }
 
+// Busca um torneio pelo slug, com o mesmo critério de fallback da listagem:
+// banco indisponível ou vazio → mock.
+export async function getTournamentBySlug(slug: string): Promise<TournamentDTO | null> {
+  try {
+    const row = await prisma.tournament.findUnique({ where: { slug } });
+    if (row) return toDTO(row);
+    const total = await prisma.tournament.count();
+    return total === 0 ? findMock(slug) : null;
+  } catch {
+    return findMock(slug);
+  }
+}
+
+function findMock(slug: string): TournamentDTO | null {
+  return MOCK_TOURNAMENTS.find((t) => t.slug === slug) ?? null;
+}
+
 function filterMock(q: TournamentQuery): TournamentDTO[] {
   return MOCK_TOURNAMENTS.filter((t) => {
     if (q.game && q.game !== "ALL" && t.game !== q.game) return false;
