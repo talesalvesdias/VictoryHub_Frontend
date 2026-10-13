@@ -46,6 +46,8 @@ No projeto da Vercel → **Settings → Environment Variables**, defina (Product
 | `AUTH_SECRET` | `npx auth secret` |
 | `AUTH_URL` / `NEXT_PUBLIC_BASE_URL` | a URL pública do deploy |
 | `STEAM_API_KEY` | chave da Steam Web API (server-only) |
+| `ANTHROPIC_API_KEY` | chave da API da Anthropic para o chatbot (server-only). Sem ela o chat responde "indisponível". Configure também um limite de gasto no Console da Anthropic. |
+| `CHAT_DAILY_LIMIT` | opcional — teto global de mensagens do chat por dia (padrão 1000) |
 
 > O `prisma generate` roda automaticamente no `postinstall`. As **migrations de produção**
 > (`prisma migrate deploy`) devem ser aplicadas contra o banco de produção — rode manualmente

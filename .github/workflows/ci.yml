@@ -8,7 +8,7 @@ on:
 
 jobs:
   quality:
-    name: Lint · Typecheck · Build
+    name: Lint · Typecheck · Testes · Build
     runs-on: ubuntu-latest
 
     # Postgres real para validar as migrations do Prisma no CI.
@@ -32,7 +32,8 @@ jobs:
       AUTH_SECRET: ci-dummy-secret-not-used-in-prod
       AUTH_URL: http://localhost:3000
       NEXT_PUBLIC_BASE_URL: http://localhost:3000
-      # STEAM_API_KEY intencionalmente vazia — o build não depende dela.
+      # STEAM_API_KEY e ANTHROPIC_API_KEY intencionalmente vazias — build e
+      # testes não dependem delas (o CI nunca chama a API do chatbot).
 
     steps:
       - uses: actions/checkout@v5
@@ -56,6 +57,9 @@ jobs:
 
       - name: Typecheck
         run: npm run typecheck
+
+      - name: Testes
+        run: npm test -- --maxWorkers=4
 
       - name: Build
         run: npm run build

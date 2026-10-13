@@ -43,6 +43,8 @@ inscrição em torneios e dashboard exigem `DATABASE_URL`.
 | `AUTH_SECRET` | Segredo do NextAuth — gere com `npx auth secret`. |
 | `AUTH_URL` / `NEXT_PUBLIC_BASE_URL` | URL base (callbacks Steam/OAuth). |
 | `STEAM_API_KEY` | Chave da Steam Web API ([obter aqui](https://steamcommunity.com/dev/apikey)). Server-only. |
+| `ANTHROPIC_API_KEY` | Chave da API da Anthropic para o chatbot ([console](https://console.anthropic.com)). Server-only. Opcional: sem ela o chat mostra "indisponível". |
+| `CHAT_DAILY_LIMIT` | Opcional. Teto global de mensagens do chat por dia (padrão 1000). |
 
 ### Banco de dados (quando tiver `DATABASE_URL`)
 
@@ -55,6 +57,7 @@ npm run db:studio     # inspeciona os dados (Prisma Studio)
 ## Scripts
 
 - `npm run dev` / `npm run build` / `npm run start`
+- `npm test` (vitest — não chama a API do chatbot)
 - `npm run db:generate | db:migrate | db:push | db:seed | db:studio`
 
 ## Arquitetura
@@ -70,3 +73,9 @@ npm run db:studio     # inspeciona os dados (Prisma Studio)
   `middleware.ts` e por guard no `dashboard/layout.tsx`.
 - **Design system**: tokens em `src/app/globals.css` (`@theme`), componentes reutilizáveis
   em `src/components/` (Navbar, Footer, Button, Card, Badge, ProgressBar, TournamentCard…).
+- **Chatbot (Assistente VictoryHub)**: widget em `src/components/chat/` (montado no
+  `layout.tsx`) + `POST /api/chat` (stream SSE). O modelo (`claude-opus-5-5`, via
+  `@anthropic-ai/sdk`) só usa ferramentas de leitura — listar/detalhar torneios,
+  recomendar e ler o perfil da sessão — definidas em `src/lib/chat/tools.ts`. Guardrails
+  (validação, rate limit por IP/usuário + teto diário na tabela `ChatUsage`, logs sem
+  conteúdo) em `src/lib/chat/`. Planejamento e decisões em `docs/planning-chatbot.md`.
