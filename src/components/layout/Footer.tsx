@@ -4,11 +4,17 @@ import CookieConsent from "./CookieContent";
 const COLUMNS = [
   {
     title: "PLATAFORMA",
-    links: ["Torneios", "Rankings", "Loja de Itens", "Como Funciona"],
+    links: [
+      { title: "Torneios", href: "/torneios" },
+      { title: "Rankings", href: "/torneios" },
+    ],
   },
   {
     title: "EMPRESA",
-    links: ["Sobre Nós", "Contato", "Carreiras"],
+    links: [
+      { title: "Sobre Nós", href: "/sobre" },
+      { title: "Contato", href: "/contato" },
+    ],
   },
 ];
 
@@ -62,11 +68,11 @@ export default function Footer() {
                 <h4 className="mb-6 text-sm tracking-wide">{col.title}</h4>
                 {col.links.map((l) => (
                   <a
-                    key={l}
-                    href="#"
+                    key={l.title}
+                    href={l.href}
                     className="mb-3 block text-sm text-content transition-colors hover:text-primary"
                   >
-                    {l}
+                    {l.title}
                   </a>
                 ))}
               </div>
